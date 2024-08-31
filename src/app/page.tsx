@@ -1,4 +1,4 @@
-import Filter from "@/pages/filter";
+import Filter from "@/components/filter";
 
 export default function Home() {
   return (

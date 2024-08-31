@@ -1,11 +1,6 @@
 import React from 'react';
 
-type DropdownSelectorProps = {
-  label: string;
-  options: string[];
-  selectedOption: string | undefined;
-  onSelect: (option: string) => void;
-};
+import { DropdownSelectorProps } from '@/types/types';
 
 export const DropdownSelector: React.FC<DropdownSelectorProps> = ({
   label,

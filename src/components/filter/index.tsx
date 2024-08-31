@@ -1,15 +1,15 @@
 import { FC } from 'react';
 
 import { createYearsArr } from '@/utils/createYearsArray';
-import { FilterForm } from '@/components/filterForm';
-import { TApiResponse } from '@/types/types';
+import { FilterForm } from '@/components/filter/filterForm';
+import { TApiResponse, TItemData } from '@/types/types';
 
 export const Filter: FC = async () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL as string;
 
   let data: TApiResponse | undefined;
   let errorMsg: string | undefined;
-  let vehicleTypes: string[] | undefined;
+  let vehicleTypes: TItemData[] | undefined;
 
   const yearsArr = createYearsArr();
 
@@ -20,20 +20,18 @@ export const Filter: FC = async () => {
     }
     data = await response.json();
 
-    if (data) {
-      const uniqueVehicleTypes = new Set(
-        data.Results.map((el) => el.MakeName)
-      );
-      vehicleTypes = Array.from(uniqueVehicleTypes);
-    }
+    vehicleTypes = data?.Results;
   } catch (err) {
     console.error('Error fetching data:', err);
     errorMsg = 'Error fetching data';
   }
 
+  if (errorMsg) {
+    return <p className="text-red-500">{errorMsg}</p>
+  }
+
   return (
     <div className="flex justify-center">
-      {errorMsg && <p className="text-red-500">{errorMsg}</p>}
       {vehicleTypes ? (
         <FilterForm
           year={yearsArr}

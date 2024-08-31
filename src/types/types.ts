@@ -11,3 +11,22 @@ export type TApiResponse = {
   SearchCriteria: string;
   Results: TItemData[];
 }
+
+export type TCustomLinkBtnProps = {
+  isSelectedVehicleType: boolean;
+  isSelectedYear: boolean;
+  makeId?: number;
+  year?: string;
+}
+
+export type FilterFormProps = {
+  vehicleTypes: TItemData[];
+  year: string[];
+}
+
+export type DropdownSelectorProps = {
+  label: string;
+  options: string[];
+  selectedOption: string | undefined;
+  onSelect: (option: string) => void;
+};

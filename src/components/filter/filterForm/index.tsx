@@ -1,20 +1,19 @@
 'use client';
 
 import { FC, useState } from 'react';
-import { DropdownSelector } from '../dropdownSelector';
-import { CustomLinkBtn } from '../customLinkBtn';
 
-interface FilterFormProps {
-  vehicleTypes: string[];
-  year: string[];
-}
+import { CustomLinkBtn } from './customLinkBtn';
+import { DropdownSelector } from './dropdownSelector';
+import { FilterFormProps, TItemData } from '@/types/types';
+
 
 export const FilterForm: FC<FilterFormProps> = ({ vehicleTypes, year }) => {
-  const [selectedVehicleType, setSelectedVehicleType] = useState<string>('');
+  const [selectedVehicleType, setSelectedVehicleType] = useState<TItemData | null>(null);
   const [selectedYear, setSelectedYear] = useState<string>('');
 
   const handleVehicleTypeSelect = (option: string) => {
-    setSelectedVehicleType(option);
+    const selectedType = vehicleTypes.find((type) => type.MakeName === option);
+    setSelectedVehicleType(selectedType || null);
   };
 
   const handleYearSelect = (option: string) => {
@@ -25,8 +24,8 @@ export const FilterForm: FC<FilterFormProps> = ({ vehicleTypes, year }) => {
     <form className="flex flex-col gap-4 w-3/4 bg-gradient-to-r from-violet-500 to-fuchsia-500 p-7 rounded-md">
       <DropdownSelector
         label="Vehicle Type"
-        options={vehicleTypes}
-        selectedOption={selectedVehicleType}
+        options={vehicleTypes.map(type => type.MakeName)}
+        selectedOption={selectedVehicleType?.MakeName || ''}
         onSelect={handleVehicleTypeSelect}
       />
 
@@ -37,7 +36,12 @@ export const FilterForm: FC<FilterFormProps> = ({ vehicleTypes, year }) => {
         onSelect={handleYearSelect}
       />
 
-      <CustomLinkBtn isSelectedVehicleType={Boolean(selectedVehicleType)} isSelectedYear={Boolean(selectedYear)} />
+      <CustomLinkBtn
+        isSelectedVehicleType={Boolean(selectedVehicleType)}
+        isSelectedYear={Boolean(selectedYear)}
+        makeId={selectedVehicleType?.MakeId}
+        year={selectedYear}
+      />
     </form>
   );
 };
