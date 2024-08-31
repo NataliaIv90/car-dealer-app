@@ -30,3 +30,24 @@ export type DropdownSelectorProps = {
   selectedOption: string | undefined;
   onSelect: (option: string) => void;
 };
+
+export type VehicleModel = {
+  Make_ID: number;
+  Make_Name: string;
+  Model_ID: number;
+  Model_Name: string;
+}
+
+export type ResultTableProps = {
+  vehicleModels: VehicleModel[];
+  year: string;
+}
+
+
+export type ResultApiResponce = {
+  Count: number;
+  Message: string;
+  SearchCriteria: string;
+  Results: VehicleModel[];
+};
+

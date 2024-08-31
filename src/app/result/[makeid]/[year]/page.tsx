@@ -1,27 +1,10 @@
-// app/result/[makeid]/[year]/page.tsx
-
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import React, { Suspense } from 'react';
 
-interface VehicleModel {
-  Make_ID: number;
-  Make_Name: string;
-  Model_ID: number;
-  Model_Name: string;
-}
+import NotFound from '@/app/not-found';
+import { ResultApiResponce, VehicleModel } from '@/types/types';
 
-type ResultApiResponce = {
-  Count: number,
-  Message: string,
-  SearchCriteria: string,
-  Results: VehicleModel[],
-}
-
-interface ResultPageProps {
-  vehicleModels: VehicleModel[];
-  makeId: string;
-  year: string;
-}
+const ResultTable = React.lazy(() => import('@/components/resultTable'));
 
 export default async function ResultPage({ params }: { params: { makeid: string; year: string } }) {
   const { makeid, year } = params;
@@ -31,7 +14,7 @@ export default async function ResultPage({ params }: { params: { makeid: string;
   const res = await fetch(apiUrl);
 
   if (!res.ok) {
-    notFound();
+    <NotFound />
   }
 
   const data: ResultApiResponce = await res.json();
@@ -42,40 +25,22 @@ export default async function ResultPage({ params }: { params: { makeid: string;
       <h1 className="text-2xl font-bold mb-6 text-center text-violet-500">
         Vehicle Models for Make ID {makeid} and Year {year}
       </h1>
-      {vehicleModels.length > 0 ? (
-        <table className="border-collapse m-auto border border-slate-500 w-9/12">
-          <thead>
-            <tr className='grid grid-cols-4 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white'>
-              <th className='border p-1 border-slate-700'>Id</th>
-              <th className='border p-1 text-center border-slate-700'>Producer</th>
-              <th className='border p-1 text-center border-slate-700'>Model</th>
-              <th className='border p-1 text-center border-slate-700'>Year</th>
-            </tr>
-          </thead>
-          <tbody className='text-sm'>
-            {vehicleModels.map((model: VehicleModel, index: number) => (
-              <tr key={`${model.Model_ID}-${index}`} className='grid grid-cols-4'>
-                <td className='border p-1 border-slate-600'>{model.Model_ID}</td>
-                <td className='border p-1 text-center border-slate-600'>{model.Make_Name}</td>
-                <td className='border p-1 text-center border-slate-600'>{model.Model_Name}</td>
-                <td className='border p-1 text-center border-slate-600'>{year}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No vehicle models found.</p>
-      )}
-      <div className='m-auto w-full text-center mt-6'>
+      <Suspense fallback={<div className="text-center">Loading...</div>}>
+        {vehicleModels.length > 0 ? (
+          <ResultTable vehicleModels={vehicleModels} year={year} />
+        ) : (
+          <p>No vehicle models found.</p>
+        )}
+      </Suspense>
+      <div className="m-auto w-full text-center mt-6">
         <Link
           href="/"
-          className="px-4 py-2 rounded-md bg-gradient-to-r from-violet-500 to-fuchsia-500 focus:outline-none focus:ring-2 focus:ring-purple-500 
+          className="text-white px-4 py-2 rounded-md bg-gradient-to-r from-violet-500 to-fuchsia-500 focus:outline-none focus:ring-2 focus:ring-purple-500 
                transition duration-150 ease-in-out"
         >
-          Back to Home
+          Close
         </Link>
       </div>
-
     </div>
   );
 }

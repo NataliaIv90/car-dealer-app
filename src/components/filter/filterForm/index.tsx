@@ -21,7 +21,7 @@ export const FilterForm: FC<FilterFormProps> = ({ vehicleTypes, year }) => {
   };
 
   return (
-    <form className="flex flex-col gap-4 w-3/4 bg-gradient-to-r from-violet-500 to-fuchsia-500 p-7 rounded-md">
+    <form className="flex items-end gap-3 w-3/4 bg-gradient-to-r from-violet-500 to-fuchsia-500 p-7 rounded-md">
       <DropdownSelector
         label="Vehicle Type"
         options={vehicleTypes.map(type => type.MakeName)}
