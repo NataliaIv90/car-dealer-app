@@ -10,19 +10,19 @@ export type TApiResponse = {
   Message: string;
   SearchCriteria: string;
   Results: TItemData[];
-}
+};
 
 export type TCustomLinkBtnProps = {
   isSelectedVehicleType: boolean;
   isSelectedYear: boolean;
   makeId?: number;
   year?: string;
-}
+};
 
 export type FilterFormProps = {
   vehicleTypes: TItemData[];
   year: string[];
-}
+};
 
 export type DropdownSelectorProps = {
   label: string;
@@ -36,13 +36,12 @@ export type VehicleModel = {
   Make_Name: string;
   Model_ID: number;
   Model_Name: string;
-}
+};
 
 export type ResultTableProps = {
   vehicleModels: VehicleModel[];
   year: string;
-}
-
+};
 
 export type ResultApiResponce = {
   Count: number;
@@ -50,4 +49,3 @@ export type ResultApiResponce = {
   SearchCriteria: string;
   Results: VehicleModel[];
 };
-

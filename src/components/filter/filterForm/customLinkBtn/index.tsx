@@ -1,9 +1,14 @@
-import { FunctionComponent } from 'react';
 import Link from 'next/link';
+import { FunctionComponent } from 'react';
 
 import { TCustomLinkBtnProps } from '@/types/types';
 
-export const CustomLinkBtn: FunctionComponent<TCustomLinkBtnProps> = ({ isSelectedVehicleType, isSelectedYear, makeId, year }) => (
+export const CustomLinkBtn: FunctionComponent<TCustomLinkBtnProps> = ({
+  isSelectedVehicleType,
+  isSelectedYear,
+  makeId,
+  year,
+}) => (
   <>
     {isSelectedVehicleType && isSelectedYear ? (
       <Link
@@ -17,7 +22,7 @@ export const CustomLinkBtn: FunctionComponent<TCustomLinkBtnProps> = ({ isSelect
     ) : (
       <button
         disabled
-        className="bg-gray-300 text-gray-500 cursor-not-allowed py-1.5 px-4 rounded"
+        className='bg-gray-300 text-gray-500 cursor-not-allowed py-1.5 px-4 rounded'
       >
         Next
       </button>

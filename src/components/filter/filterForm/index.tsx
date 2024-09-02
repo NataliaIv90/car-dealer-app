@@ -4,8 +4,8 @@ import { FC, useState } from 'react';
 
 import { CustomLinkBtn } from './customLinkBtn';
 import { DropdownSelector } from './dropdownSelector';
-import { FilterFormProps, TItemData } from '@/types/types';
 
+import { FilterFormProps, TItemData } from '@/types/types';
 
 export const FilterForm: FC<FilterFormProps> = ({ vehicleTypes, year }) => {
   const [selectedVehicleType, setSelectedVehicleType] = useState<TItemData | null>(null);
@@ -21,16 +21,16 @@ export const FilterForm: FC<FilterFormProps> = ({ vehicleTypes, year }) => {
   };
 
   return (
-    <form className="flex items-end gap-3 w-3/4 bg-gradient-to-r from-violet-500 to-fuchsia-500 p-7 rounded-md">
+    <form className='flex items-end gap-3 w-3/4 bg-gradient-to-r from-violet-500 to-fuchsia-500 p-7 rounded-md'>
       <DropdownSelector
-        label="Vehicle Type"
-        options={vehicleTypes.map(type => type.MakeName)}
+        label='Vehicle Type'
+        options={vehicleTypes.map((type) => type.MakeName)}
         selectedOption={selectedVehicleType?.MakeName || ''}
         onSelect={handleVehicleTypeSelect}
       />
 
       <DropdownSelector
-        label="Year"
+        label='Year'
         options={year}
         selectedOption={selectedYear}
         onSelect={handleYearSelect}

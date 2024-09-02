@@ -1,29 +1,42 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 const centralBtns = [
-  { name: 'Buy', link: '#', },
+  { name: 'Buy', link: '#' },
   { name: 'How it work', link: '#' },
   { name: 'Review', link: '#' },
-  { name: 'Service', link: '#', },
+  { name: 'Service', link: '#' },
 ];
 
 export const Header = () => (
-  <header className="bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white">
-    <nav className="mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8" aria-label="Global">
-      <div className="flex lg:flex-1">
-        <Link href="/" className="m-1.5 p-1.5 text-back">
+  <header className='bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white'>
+    <nav
+      className='mx-auto flex max-w-7xl items-center justify-between p-2 lg:px-8'
+      aria-label='Global'
+    >
+      <div className='flex lg:flex-1'>
+        <Link
+          href='/'
+          className='m-1.5 p-1.5 text-back'
+        >
           Home
         </Link>
       </div>
-      <div className="flex lg:flex-1 justify-start">
+      <div className='flex lg:flex-1 justify-start'>
         {centralBtns.map((btn) => (
-          <Link key={btn.name} href={btn.link} className="m-1.5 p-1.5 text-back">
+          <Link
+            key={btn.name}
+            href={btn.link}
+            className='m-1.5 p-1.5 text-back'
+          >
             {btn.name}
           </Link>
         ))}
       </div>
-      <div className="flex lg:flex-1">
-        <button className="m-1.5 p-1.5 text-back" disabled>
+      <div className='flex lg:flex-1'>
+        <button
+          className='m-1.5 p-1.5 text-back'
+          disabled
+        >
           Login
         </button>
       </div>
